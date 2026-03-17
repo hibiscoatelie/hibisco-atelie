@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hibisco Ateliê</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: #ffffff;
+      color: #333;
+    }
+
+    header {
+      background: #7d9470;
+      padding: 20px 20px 10px;
+      text-align: center;
+    }
+
+    .logo {
+      max-width: 300px;
+      width: 100%;
+      height: auto;
+      display: block;
+      margin: 0 auto;
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      padding: 15px;
+      border-bottom: 1px solid #eee;
+      background: #fff;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #7d9470;
+      font-weight: 500;
+      transition: 0.3s;
+    }
+
+    nav a:hover {
+      opacity: 0.7;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 40px 20px 10px;
+    }
+
+    .hero h2 {
+      font-size: 28px;
+      color: #7d9470;
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      max-width: 500px;
+      margin: 0 auto 10px;
+      color: #666;
+    }
+
+    .section {
+      padding: 40px 20px;
+      text-align: center;
+    }
+
+    .section h2 {
+      color: #7d9470;
+      margin-bottom: 25px;
+    }
+
+    .products {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+    }
+
+    .product {
+      width: 260px;
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.06);
+      padding: 18px;
+      transition: 0.3s;
+    }
+
+    .product:hover {
+      transform: translateY(-8px);
+    }
+
+    .product img {
+      width: 100%;
+      border-radius: 12px;
+    }
+
+    .product h3 {
+      margin: 12px 0 5px;
+      color: #7d9470;
+      font-size: 18px;
+    }
+
+    .price {
+      font-weight: 600;
+      margin: 5px 0;
+      font-size: 16px;
+    }
+
+    .buy-btn {
+      margin-top: 12px;
+      display: block;
+      background: #7d9470;
+      color: white;
+      padding: 12px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-size: 14px;
+      transition: 0.3s;
+    }
+
+    .buy-btn:hover {
+      background: #6a7f60;
+    }
+
+    .contact-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+
+    .btn {
+      background: #7d9470;
+      color: white;
+      padding: 12px 20px;
+      border-radius: 30px;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      background: #6a7f60;
+    }
+
+    .whatsapp-float {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #25D366;
+      color: white;
+      padding: 15px;
+      border-radius: 50%;
+      text-decoration: none;
+      font-size: 22px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+
+    footer {
+      background: #7d9470;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      margin-top: 40px;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <img src="logo.png" alt="Hibisco Ateliê" class="logo">
+</header>
+
+<nav>
+  <a href="#">Início</a>
+  <a href="#produtos">Produtos</a>
+  <a href="#contato">Contato</a>
+</nav>
+
+<section class="hero">
+  <h2>Tudo feito à mão com muito carinho 🌿</h2>
+  <p>Amor, leveza e cuidado em cada peça.</p>
+</section>
+
+<section class="section" id="produtos">
+  <h2>Nossos Produtos</h2>
+  <div class="products">
+
+    <div class="product">
+      <img src="produto1.jpg">
+      <h3>Velas aromáticas</h3>
+      <p class="price">R$ 39,90</p>
+      <p>Lavanda, Baunilha e Flor de cerejeira.</p>
+      <a class="buy-btn" href="https://wa.me/5521975780920?text=Olá,%20quero%20comprar%20Velas%20Aromáticas%20por%20R$39,90" target="_blank">Comprar</a>
+    </div>
+
+    <div class="product">
+      <img src="produto2.jpg">
+      <h3>Kit sabonetes artesanais</h3>
+      <p class="price">R$ 69,90</p>
+      <p>Sabonetes à base de óleos essenciais</p>
+      <a class="buy-btn" href="https://wa.me/5521975780920?text=Olá,%20quero%20comprar%20Sabonetes%20Artesanais%20por%20R$69,90" target="_blank">Comprar</a>
+    </div>
+
+  </div>
+</section>
+
+<section class="section" id="contato">
+  <h2>Contato</h2>
+  <p>Entre em contato pelos canais abaixo</p>
+  <div class="contact-buttons">
+    <a class="btn" href="https://wa.me/5521975780920" target="_blank">WhatsApp</a>
+    <a class="btn" href="https://instagram.com/hibiscoatelie_" target="_blank">Instagram</a>
+    <a class="btn" href="mailto:contatohibiscoatelie@gmail.com" target="_blank">Email</a>
+  </div>
+</section>
+
+<a class="whatsapp-float" href="https://wa.me/5521975780920" target="_blank">💬</a>
+
+<footer>
+  <p>© 2026 Hibisco Ateliê • Todos os direitos reservados</p>
+</footer>
+
+</body>
+</html>
