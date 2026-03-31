@@ -53,7 +53,6 @@ header { background:#7d9470; padding:20px; text-align:center; }
   z-index:999;
   overflow-y:auto;
 }
-
 .cart.active { right:0; }
 
 .cart-item {
@@ -276,13 +275,21 @@ function changeQty(i,c){ cart[i].qty+=c; if(cart[i].qty<=0) cart.splice(i,1); sa
 
 function toggleCart(force){ document.getElementById("cart").classList.toggle("active", force); }
 
+/* ✅ AJUSTE AQUI */
 function openForm(){
-  if(cart.length===0){ alert("Seu carrinho está vazio."); return; }
-  document.getElementById("form").style.display="flex";
+  if(cart.length===0){
+    alert("Seu carrinho está vazio.");
+    return;
+  }
+
+  document.getElementById("cart").classList.remove("active");
+
+  setTimeout(() => {
+    document.getElementById("form").style.display="flex";
+  }, 200);
 }
 
 function closeForm(){ document.getElementById("form").style.display="none"; }
-
 function closeSuccess(){ document.getElementById("success").style.display="none"; }
 
 function clearCart(){ cart=[]; saveCart(); renderCart(); }
@@ -315,45 +322,32 @@ function buscarCEP(){
     });
 }
 
-/* ✅ MENSAGEM PROFISSIONAL */
 function sendOrder(){
-
   let total = 0;
-
-  let msg = "🛍️ *NOVO PEDIDO - HIBISCO ATELIÊ*%0A";
-  msg += "────────────────────%0A%0A";
-
+  let msg = "🛍️ *NOVO PEDIDO - HIBISCO ATELIÊ*%0A────────────────────%0A%0A";
   msg += "*🧾 ITENS DO PEDIDO*%0A";
 
   cart.forEach(i=>{
     let sub = i.price * i.qty;
     total += sub;
-
-    msg += `• ${i.name}%0A`;
-    msg += `  Quantidade: ${i.qty}%0A`;
-    msg += `  Valor: R$ ${sub.toFixed(2)}%0A%0A`;
+    msg += `• ${i.name}%0A  Quantidade: ${i.qty}%0A  Valor: R$ ${sub.toFixed(2)}%0A%0A`;
   });
 
   msg += "────────────────────%0A";
   msg += `*💰 TOTAL: R$ ${total.toFixed(2)}*%0A%0A`;
 
   msg += "*👤 DADOS DO CLIENTE*%0A";
-  msg += `Nome: ${nome.value}%0A`;
-  msg += `Telefone: ${tel.value}%0A%0A`;
+  msg += `Nome: ${nome.value}%0ATelefone: ${tel.value}%0A%0A`;
 
   msg += "*📍 ENDEREÇO*%0A";
-  msg += `${end.value}, ${numero.value}%0A`;
-  msg += `Bairro: ${bairro.value}%0A`;
-  msg += `${cidade.value} - ${estado.value}%0A`;
-  msg += `CEP: ${cep.value}%0A`;
+  msg += `${end.value}, ${numero.value}%0ABairro: ${bairro.value}%0A`;
+  msg += `${cidade.value} - ${estado.value}%0ACEP: ${cep.value}%0A`;
 
   if(complemento.value){
     msg += `Complemento: ${complemento.value}%0A`;
   }
 
-  msg += "%0A────────────────────%0A";
-  msg += "Frete a confirmar.%0A";
-  msg += "Retornaremos em breve para finalização do pedido.";
+  msg += "%0A────────────────────%0AFrete a confirmar.%0ARetornaremos em breve.";
 
   window.whatsLink = "https://wa.me/5521975780920?text=" + msg;
 
