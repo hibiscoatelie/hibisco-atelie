@@ -1,262 +1,374 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hibisco Ateliê</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hibisco Ateliê</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Poppins', sans-serif;
-      background: #ffffff;
-      color: #333;
-    }
+<style>
+body { margin:0; font-family:'Poppins', sans-serif; background:#fff; color:#333; }
+header { background:#7d9470; padding:20px; text-align:center; }
+.logo { max-width:300px; }
+.hero { text-align:center; padding:40px 20px; }
+.hero h2 { color:#7d9470; }
 
-    header {
-      background: #7d9470;
-      padding: 20px 20px 10px;
-      text-align: center;
-    }
+.products { display:flex; flex-wrap:wrap; justify-content:center; gap:30px; padding:30px; }
 
-    .logo {
-      max-width: 300px;
-      width: 100%;
-      height: auto;
-      display: block;
-      margin: 0 auto;
-    }
+.product {
+  width:260px;
+  background:#fff;
+  border-radius:16px;
+  box-shadow:0 10px 25px rgba(0,0,0,0.06);
+  padding:18px;
+  text-align:center;
+}
 
-    nav {
-      display: flex;
-      justify-content: center;
-      gap: 40px;
-      padding: 15px;
-      border-bottom: 1px solid #eee;
-      background: #fff;
-      position: sticky;
-      top: 0;
-      z-index: 10;
-    }
+.product img { width:100%; border-radius:12px; }
+.product h3 { color:#7d9470; margin:12px 0 6px; }
+.product .price { font-weight:bold; margin:6px 0; }
+.product p { margin:6px 0 10px; }
 
-    nav a {
-      text-decoration: none;
-      color: #7d9470;
-      font-weight: 500;
-      transition: 0.3s;
-    }
+.buy-btn {
+  margin-top:10px;
+  background:#7d9470;
+  color:#fff;
+  padding:10px;
+  border-radius:20px;
+  cursor:pointer;
+}
 
-    nav a:hover {
-      opacity: 0.7;
-    }
+/* CARRINHO */
+.cart {
+  position:fixed;
+  right:-400px;
+  top:0;
+  width:350px;
+  height:100%;
+  background:#fff;
+  box-shadow:-5px 0 20px rgba(0,0,0,0.1);
+  padding:20px;
+  transition:0.3s;
+  z-index:999;
+  overflow-y:auto;
+}
 
-    .hero {
-      text-align: center;
-      padding: 40px 20px 10px;
-    }
+.cart.active { right:0; }
 
-    .hero h2 {
-      font-size: 28px;
-      color: #7d9470;
-      margin-bottom: 10px;
-    }
+.cart-item {
+  display:flex;
+  justify-content:space-between;
+  border-bottom:1px solid #eee;
+  padding:10px 0;
+}
 
-    .hero p {
-      max-width: 500px;
-      margin: 0 auto 10px;
-      color: #666;
-    }
+.qty-btn {
+  background:#ddd;
+  padding:3px 8px;
+  cursor:pointer;
+  border-radius:5px;
+}
 
-    .section {
-      padding: 40px 20px;
-      text-align: center;
-    }
+.cart-toggle {
+  position:fixed;
+  bottom:80px;
+  right:20px;
+  background:#7d9470;
+  color:#fff;
+  padding:15px;
+  border-radius:50%;
+  cursor:pointer;
+}
 
-    .section h2 {
-      color: #7d9470;
-      margin-bottom: 25px;
-    }
+.close-cart { float:right; cursor:pointer; }
 
-    .products {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 30px;
-    }
+/* FORM */
+.form-overlay {
+  position:fixed;
+  top:0; left:0;
+  width:100%; height:100%;
+  background:rgba(0,0,0,0.5);
+  display:none;
+  justify-content:center;
+  align-items:center;
+}
 
-    .product {
-      width: 260px;
-      background: white;
-      border-radius: 16px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.06);
-      padding: 18px;
-      transition: 0.3s;
-    }
+.form-box {
+  position:relative;
+  background:#fff;
+  padding:25px;
+  border-radius:12px;
+  width:90%;
+  max-width:400px;
+  text-align:center;
+}
 
-    .product:hover {
-      transform: translateY(-8px);
-    }
+.close-form {
+  position:absolute;
+  right:15px;
+  top:10px;
+  cursor:pointer;
+}
 
-    .product img {
-      width: 100%;
-      border-radius: 12px;
-    }
+.form-box input {
+  width:100%;
+  padding:10px;
+  margin:5px 0;
+}
 
-    .product h3 {
-      margin: 12px 0 5px;
-      color: #7d9470;
-      font-size: 18px;
-    }
+button {
+  width:100%;
+  padding:12px;
+  margin-top:10px;
+  border:none;
+  background:#7d9470;
+  color:#fff;
+  border-radius:8px;
+  cursor:pointer;
+}
 
-    .price {
-      font-weight: 600;
-      margin: 5px 0;
-      font-size: 16px;
-    }
-
-    .buy-btn {
-      margin-top: 12px;
-      display: block;
-      background: #7d9470;
-      color: white;
-      padding: 12px;
-      border-radius: 30px;
-      text-decoration: none;
-      font-size: 14px;
-      transition: 0.3s;
-    }
-
-    .buy-btn:hover {
-      background: #6a7f60;
-    }
-
-    .contact-buttons {
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-      flex-wrap: wrap;
-      margin-top: 20px;
-    }
-
-    .btn {
-      background: #7d9470;
-      color: white;
-      padding: 12px 20px;
-      border-radius: 30px;
-      text-decoration: none;
-      transition: 0.3s;
-    }
-
-    .btn:hover {
-      background: #6a7f60;
-    }
-
-    .whatsapp-float {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: #25D366;
-      color: white;
-      padding: 15px;
-      border-radius: 50%;
-      text-decoration: none;
-      font-size: 22px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-    }
-
-    footer {
-      background: #7d9470;
-      color: white;
-      text-align: center;
-      padding: 20px;
-      margin-top: 40px;
-      font-size: 14px;
-    }
-  </style>
+button:hover { opacity:0.9; }
+</style>
 </head>
+
 <body>
 
 <header>
-  <img src="logo.png" alt="Hibisco Ateliê" class="logo">
+<img src="logo.png" class="logo">
 </header>
 
-<nav>
-  <a href="#">Início</a>
-  <a href="#produtos">Produtos</a>
-  <a href="#contato">Contato</a>
-</nav>
-
 <section class="hero">
-  <h2>Tudo feito à mão com muito carinho 🌿</h2>
-  <p>Amor, leveza e cuidado em cada peça.</p>
+<h2>Tudo feito à mão com muito carinho</h2>
+<p>Amor, leveza e cuidado em cada peça.</p>
 </section>
 
-<section class="section" id="produtos">
-  <h2>Nossos Produtos</h2>
-  <div class="products">
+<section>
+<h2 style="text-align:center; color:#7d9470;">Nossos Produtos</h2>
 
-    <div class="product">
-      <img src="produto1.jpg">
-      <h3>Vela Aromática 150g - Lavanda</h3>
-      <p class="price">R$ 49,99</p>
-      <p>Mais que um aroma, seu momento.</p>
-      <a class="buy-btn" href="https://wa.me/5521975780920?text=Ol%C3%A1,%20eu%20gostaria%20de%20comprar%20a%20vela%20arom%C3%A1tica." target="_blank">Comprar</a>
-    </div>
+<div class="products">
 
-   
-    <div class="product">
-      <img src="produto3.jpg">
-      <h3>Vela Aromática 150g - Flor de Cerejeira</h3>
-      <p class="price">R$ 49,99</p>
-      <p>Mais que um aroma, seu momento.</p>
-      <a class="buy-btn" href="https://wa.me/5521975780920?text=Ol%C3%A1,%20gostaria%20de%20comprar%20o%20kit%20de%20sabonetes." target="_blank">Comprar</a>
-    </div>
+<div class="product">
+<img src="produto1.jpg">
+<h3>Vela Aromática 150g - Lavanda</h3>
+<p class="price">R$ 49,99</p>
+<p>Mais que um aroma, seu momento.</p>
+<div class="buy-btn" onclick="addToCart('Vela Lavanda',49.99)">Comprar</div>
+</div>
 
-    <div class="product">
-      <img src="produto4.jpg">
-      <h3>Vela Aromática 150g - Baunilha</h3>
-      <p class="price">R$ 49,99</p>
-      <p>Mais que um aroma, seu momento.</p>
-      <a class="buy-btn" href="https://wa.me/5521975780920?text=Ol%C3%A1,%20gostaria%20de%20comprar%20o%20kit%20de%20sabonetes." target="_blank">Comprar</a>
-    </div>
+<div class="product">
+<img src="produto3.jpg">
+<h3>Vela Aromática 150g - Flor de Cerejeira</h3>
+<p class="price">R$ 49,99</p>
+<p>Mais que um aroma, seu momento.</p>
+<div class="buy-btn" onclick="addToCart('Vela Cerejeira',49.99)">Comprar</div>
+</div>
 
-    <div class="product">
-      <img src="produto2.jpg">
-      <h3>Kit Sabonetes Artesanais - 200g/un</h3>
-      <p class="price">R$ 69,99</p>
-      <p>Limpeza suave com o poder dos óleos essenciais.</p>
-      <a class="buy-btn" href="https://wa.me/5521975780920?text=Ol%C3%A1,%20gostaria%20de%20comprar%20o%20kit%20de%20sabonetes." target="_blank">Comprar</a>
-    </div>
+<div class="product">
+<img src="produto4.jpg">
+<h3>Vela Aromática 150g - Baunilha</h3>
+<p class="price">R$ 49,99</p>
+<p>Mais que um aroma, seu momento.</p>
+<div class="buy-btn" onclick="addToCart('Vela Baunilha',49.99)">Comprar</div>
+</div>
 
-    <div class="product">
-      <img src="produto5.jpg">
-      <h3>Kit Vela Aromática 150g + Sabonete 100g</h3>
-      <p class="price">R$64,99</p>
-      <p>A combinação ideal de aroma e cuidado para o seu dia a dia.</p>
-      <a class="buy-btn" href="https://wa.me/5521975780920?text=Ol%C3%A1,%20gostaria%20de%20comprar%20o%20kit%20de%20sabonetes." target="_blank">Comprar</a>
-    </div>
+<div class="product">
+<img src="produto2.jpg">
+<h3>Kit Sabonetes Artesanais - 200g/un</h3>
+<p class="price">R$ 69,99</p>
+<p>Limpeza suave com o poder dos óleos essenciais.</p>
+<div class="buy-btn" onclick="addToCart('Kit Sabonetes',69.99)">Comprar</div>
+</div>
 
+<div class="product">
+<img src="produto5.jpg">
+<h3>Kit Vela Aromática 150g + Sabonete 100g</h3>
+<p class="price">R$ 64,99</p>
+<p>A combinação ideal de aroma e cuidado para o seu dia a dia.</p>
+<div class="buy-btn" onclick="addToCart('Kit Vela + Sabonete',64.99)">Comprar</div>
+</div>
 
-  </div>
+</div>
 </section>
 
-<section class="section" id="contato">
-  <h2>Contato</h2>
-  <p>Entre em contato pelos canais abaixo</p>
-  <div class="contact-buttons">
-    <a class="btn" href="https://wa.me/5521975780920" target="_blank">WhatsApp</a>
-    <a class="btn" href="https://instagram.com/hibiscoatelie_" target="_blank">Instagram</a>
-    <a class="btn" href="mailto:contatohibiscoatelie@gmail.com" target="_blank">Email</a>
-  </div>
-</section>
+<!-- CARRINHO -->
+<div class="cart" id="cart">
+<span class="close-cart" onclick="toggleCart()">✖</span>
+<h2>Seu Carrinho</h2>
+<div id="cart-items"></div>
+<h3 id="total"></h3>
 
-<a class="whatsapp-float" href="https://wa.me/5521975780920" target="_blank">💬</a>
+<button onclick="openForm()">Finalizar Compra</button>
+<button onclick="clearCart()" style="background:#ccc;color:#333;">Limpar Carrinho</button>
+<button onclick="toggleCart()" style="background:#eee;color:#333;">Continuar Comprando</button>
+</div>
 
-<footer>
-  <p>© 2026 Hibisco Ateliê • Todos os direitos reservados</p>
-</footer>
+<div class="cart-toggle" onclick="toggleCart()">🛒</div>
+
+<!-- FORM -->
+<div class="form-overlay" id="form">
+<div class="form-box">
+<span class="close-form" onclick="closeForm()">✖</span>
+
+<h3>Finalização do pedido</h3>
+<p>Preencha seus dados para prosseguirmos com o pedido.<br><br>O frete será calculado após confirmação.</p>
+
+<input id="nome" placeholder="Nome">
+<input id="tel" placeholder="Telefone" oninput="formatarTelefone(this)">
+<input id="cep" placeholder="CEP" oninput="formatarCEP(this)" onblur="buscarCEP()">
+<input id="end" placeholder="Endereço">
+
+<div style="display:flex; gap:10px;">
+<input id="numero" placeholder="Nº" style="width:30%;">
+<input id="bairro" placeholder="Bairro" style="width:70%;">
+</div>
+
+<input id="cidade" placeholder="Cidade" readonly>
+<input id="complemento" placeholder="Complemento (opcional)">
+<input id="estado" placeholder="Estado" readonly>
+
+<button onclick="sendOrder()">Enviar Pedido</button>
+</div>
+</div>
+
+<!-- CONFIRMAÇÃO -->
+<div class="form-overlay" id="success">
+<div class="form-box">
+<span class="close-form" onclick="closeSuccess()">✖</span>
+
+<h3>Pedido enviado</h3>
+<p>Seu pedido foi registrado com sucesso.<br><br>Clique abaixo para continuar no WhatsApp.</p>
+
+<button onclick="goToWhatsApp()">Continuar</button>
+</div>
+</div>
+
+<script>
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+function saveCart(){ localStorage.setItem("cart", JSON.stringify(cart)); }
+
+function addToCart(name, price){
+  let item = cart.find(i=>i.name===name);
+  if(item){ item.qty++; } else { cart.push({name,price,qty:1}); }
+  saveCart(); renderCart(); toggleCart(true);
+}
+
+function renderCart(){
+  let html="", total=0;
+  if(cart.length===0){ html="<p>Seu carrinho está vazio</p>"; }
+  cart.forEach((item,i)=>{
+    total+=item.price*item.qty;
+    html+=`
+    <div class="cart-item">
+      <div><b>${item.name}</b><br>R$ ${item.price.toFixed(2)} x ${item.qty}</div>
+      <div>
+        <span class="qty-btn" onclick="changeQty(${i},-1)">-</span>
+        <span class="qty-btn" onclick="changeQty(${i},1)">+</span>
+      </div>
+    </div>`;
+  });
+  document.getElementById("cart-items").innerHTML=html;
+  document.getElementById("total").innerText="Total: R$ "+total.toFixed(2);
+}
+
+function changeQty(i,c){ cart[i].qty+=c; if(cart[i].qty<=0) cart.splice(i,1); saveCart(); renderCart(); }
+
+function toggleCart(force){ document.getElementById("cart").classList.toggle("active", force); }
+
+function openForm(){
+  if(cart.length===0){ alert("Seu carrinho está vazio."); return; }
+  document.getElementById("form").style.display="flex";
+}
+
+function closeForm(){ document.getElementById("form").style.display="none"; }
+
+function closeSuccess(){ document.getElementById("success").style.display="none"; }
+
+function clearCart(){ cart=[]; saveCart(); renderCart(); }
+
+function formatarCEP(c){ let v=c.value.replace(/\D/g,''); c.value=v.length>5?v.slice(0,5)+"-"+v.slice(5):v; }
+
+function formatarTelefone(c){
+  let v=c.value.replace(/\D/g,'');
+  if(v.length>10) c.value="("+v.slice(0,2)+") "+v.slice(2,7)+"-"+v.slice(7);
+  else if(v.length>6) c.value="("+v.slice(0,2)+") "+v.slice(2,6)+"-"+v.slice(6);
+  else if(v.length>2) c.value="("+v.slice(0,2)+") "+v.slice(2);
+  else c.value=v;
+}
+
+function buscarCEP(){
+  const cepInput = document.getElementById("cep");
+  const cep = cepInput.value.replace(/\D/g,'');
+
+  if(cep.length !== 8) return;
+
+  fetch(`https://viacep.com.br/ws/${cep}/json/`)
+    .then(r => r.json())
+    .then(d => {
+      if(d.erro) return;
+
+      document.getElementById("end").value = d.logradouro || "";
+      document.getElementById("bairro").value = d.bairro || "";
+      document.getElementById("cidade").value = d.localidade || "";
+      document.getElementById("estado").value = d.uf || "";
+    });
+}
+
+/* ✅ MENSAGEM PROFISSIONAL */
+function sendOrder(){
+
+  let total = 0;
+
+  let msg = "🛍️ *NOVO PEDIDO - HIBISCO ATELIÊ*%0A";
+  msg += "────────────────────%0A%0A";
+
+  msg += "*🧾 ITENS DO PEDIDO*%0A";
+
+  cart.forEach(i=>{
+    let sub = i.price * i.qty;
+    total += sub;
+
+    msg += `• ${i.name}%0A`;
+    msg += `  Quantidade: ${i.qty}%0A`;
+    msg += `  Valor: R$ ${sub.toFixed(2)}%0A%0A`;
+  });
+
+  msg += "────────────────────%0A";
+  msg += `*💰 TOTAL: R$ ${total.toFixed(2)}*%0A%0A`;
+
+  msg += "*👤 DADOS DO CLIENTE*%0A";
+  msg += `Nome: ${nome.value}%0A`;
+  msg += `Telefone: ${tel.value}%0A%0A`;
+
+  msg += "*📍 ENDEREÇO*%0A";
+  msg += `${end.value}, ${numero.value}%0A`;
+  msg += `Bairro: ${bairro.value}%0A`;
+  msg += `${cidade.value} - ${estado.value}%0A`;
+  msg += `CEP: ${cep.value}%0A`;
+
+  if(complemento.value){
+    msg += `Complemento: ${complemento.value}%0A`;
+  }
+
+  msg += "%0A────────────────────%0A";
+  msg += "Frete a confirmar.%0A";
+  msg += "Retornaremos em breve para finalização do pedido.";
+
+  window.whatsLink = "https://wa.me/5521975780920?text=" + msg;
+
+  closeForm();
+  document.getElementById("success").style.display="flex";
+}
+
+function goToWhatsApp(){
+  document.getElementById("success").style.display="none";
+  clearCart();
+  window.open(window.whatsLink,"_blank");
+}
+
+window.onload=renderCart;
+</script>
 
 </body>
 </html>
