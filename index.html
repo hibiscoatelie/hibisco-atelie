@@ -11,6 +11,7 @@
 body { margin:0; font-family:'Poppins', sans-serif; background:#fff; color:#333; }
 header { background:#7d9470; padding:20px; text-align:center; }
 .logo { max-width:300px; }
+
 .hero { text-align:center; padding:40px 20px; }
 .hero h2 { color:#7d9470; }
 
@@ -190,6 +191,23 @@ button:hover { opacity:0.9; }
 </div>
 </section>
 
+<<!-- CONTATO -->
+<section style="padding:40px 20px; text-align:center;">
+<h2 style="color:#7d9470;">Contato</h2>
+<p>Entre em contato pelos canais abaixo</p>
+
+<div style="display:flex; justify-content:center; gap:15px; flex-wrap:wrap; margin-top:20px;">
+<a href="https://wa.me/5521975780920" target="_blank" style="background:#7d9470;color:#fff;padding:12px 20px;border-radius:30px;text-decoration:none;">WhatsApp</a>
+<a href="https://instagram.com/hibiscoatelie_" target="_blank" style="background:#7d9470;color:#fff;padding:12px 20px;border-radius:30px;text-decoration:none;">Instagram</a>
+<a href="mailto:contatohibiscoatelie@gmail.com" target="_blank" style="background:#7d9470;color:#fff;padding:12px 20px;border-radius:30px;text-decoration:none;">Email</a>
+</div>
+</section>
+
+<!-- FOOTER -->
+<footer style="background:#7d9470;color:#fff;text-align:center;padding:20px;margin-top:40px;font-size:14px;">
+<p>©️ 2026 Hibisco Ateliê • Todos os direitos reservados</p>
+</footer>
+
 <!-- CARRINHO -->
 <div class="cart" id="cart">
 <span class="close-cart" onclick="toggleCart()">✖</span>
@@ -275,7 +293,6 @@ function changeQty(i,c){ cart[i].qty+=c; if(cart[i].qty<=0) cart.splice(i,1); sa
 
 function toggleCart(force){ document.getElementById("cart").classList.toggle("active", force); }
 
-/* ✅ AJUSTE AQUI */
 function openForm(){
   if(cart.length===0){
     alert("Seu carrinho está vazio.");
@@ -324,30 +341,42 @@ function buscarCEP(){
 
 function sendOrder(){
   let total = 0;
-  let msg = "🛍️ *NOVO PEDIDO - HIBISCO ATELIÊ*%0A────────────────────%0A%0A";
-  msg += "*🧾 ITENS DO PEDIDO*%0A";
+  let msg = "*HIBISCO ATELIÊ - NOVO PEDIDO*%0A";
+  msg += "━━━━━━━━━━━━━━━━━━━━━━━━%0A%0A";
 
-  cart.forEach(i=>{
+  msg += "*ITENS DO PEDIDO*%0A%0A";
+
+  cart.forEach(i => {
     let sub = i.price * i.qty;
     total += sub;
-    msg += `• ${i.name}%0A  Quantidade: ${i.qty}%0A  Valor: R$ ${sub.toFixed(2)}%0A%0A`;
+
+    msg += `${i.qty}x ${i.name}%0A`;
+    msg += `Valor: R$ ${sub.toFixed(2).replace('.', ',')}%0A%0A`;
   });
 
-  msg += "────────────────────%0A";
-  msg += `*💰 TOTAL: R$ ${total.toFixed(2)}*%0A%0A`;
+  msg += "━━━━━━━━━━━━━━━━━━━━━━━━%0A";
+  msg += `*TOTAL DO PEDIDO*%0A`;
+  msg += `R$ ${total.toFixed(2).replace('.', ',')}%0A%0A`;
 
-  msg += "*👤 DADOS DO CLIENTE*%0A";
-  msg += `Nome: ${nome.value}%0ATelefone: ${tel.value}%0A%0A`;
+  msg += "*DADOS DO CLIENTE*%0A";
+  msg += `Nome: ${nome.value}%0A`;
+  msg += `Telefone: ${tel.value}%0A%0A`;
 
-  msg += "*📍 ENDEREÇO*%0A";
-  msg += `${end.value}, ${numero.value}%0ABairro: ${bairro.value}%0A`;
-  msg += `${cidade.value} - ${estado.value}%0ACEP: ${cep.value}%0A`;
+  msg += "*ENDEREÇO DE ENTREGA*%0A";
+  msg += `${end.value}, ${numero.value}%0A`;
 
-  if(complemento.value){
-    msg += `Complemento: ${complemento.value}%0A`;
+  if (complemento.value) {
+    msg += `${complemento.value}%0A`;
   }
 
-  msg += "%0A────────────────────%0AFrete a confirmar.%0ARetornaremos em breve.";
+  msg += `${bairro.value}%0A`;
+  msg += `${cidade.value} - ${estado.value}%0A`;
+  msg += `CEP: ${cep.value}%0A%0A`;
+
+  msg += "━━━━━━━━━━━━━━━━━━━━━━━━%0A";
+  msg += "Frete: a confirmar%0A%0A";
+
+  msg += "Obrigada por escolher o Hibisco Ateliê! <3";
 
   window.whatsLink = "https://wa.me/5521975780920?text=" + msg;
 
