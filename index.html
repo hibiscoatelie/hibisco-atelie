@@ -18,7 +18,8 @@ header { background:#7d9470; padding:20px; text-align:center; }
 .products { display:flex; flex-wrap:wrap; justify-content:center; gap:30px; padding:30px; }
 
 .product {
-  width:220px;
+  width: calc(25% - 30px);
+  min-width: 220px;
   background:#fff;
   border-radius:16px;
   box-shadow:0 10px 25px rgba(0,0,0,0.06);
@@ -240,7 +241,7 @@ button:hover { opacity:0.9; }
 <h3>Kit 3 Sabonetes Artesanais - 200g/un</h3>
 <p>Limpeza suave com o poder dos óleos essenciais.</p>
 <p class="price">R$ 70,00</p>
-<div class="buy-btn" onclick="addToCart('Kit Sabonetes',70,00)">Comprar</div>
+<div class="buy-btn" onclick="addToCart('Kit Sabonetes',70)" >Comprar</div>
 </div>
 
 </div>
