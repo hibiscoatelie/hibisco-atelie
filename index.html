@@ -144,47 +144,57 @@ button:hover { opacity:0.9; }
 <p>Amor, leveza e cuidado em cada peça.</p>
 </section>
 
-<section style="background:#f8f4f1; text-align:center; padding:20px;">
-<h2 style="color:#7d9470;">💐 Especial Dia das Mães</h2>
-<p>Presentes com embalagem especial por tempo limitado</p>
-</section>
-
 <section>
 <h2 style="text-align:center; color:#7d9470;">Nossos Produtos</h2>
 
 <div class="products">
 
-<!-- KITS DIA DAS MÃES -->
+<!-- KITS -->
 <div class="product">
 <img src="kit-momento.jpg">
 <h3>Kit - Meu Momento</h3>
 <p>3 Sabonetes Artesanais 100g </p>
-<p class="price">R$ 35,00</p>
-<div class="buy-btn" onclick="addToCart('Kit Meu Momento',35)">Comprar 💝</div>
+<p class="price">R$ 45,00</p>
+<div class="buy-btn" onclick="addToCart('Kit Meu Momento',45)">Comprar</div>
 </div>
 
 <div class="product">
 <img src="kit-autocuidado.jpg">
 <h3>Kit - Autocuidado</h3>
 <p>Vela Aromática 150g + Sabonete 100g</p>
-<p class="price">R$ 65,00</p>
-<div class="buy-btn" onclick="addToCart('Kit Autocuidado',65)">Comprar 💝</div>
+<p class="price">R$ 70,00</p>
+<div class="buy-btn" onclick="addToCart('Kit Autocuidado',70)">Comprar</div>
 </div>
 
 <div class="product">
 <img src="kit-aconchego.jpg">
 <h3>Kit - Aconchego</h3>
-<p>Vela Aromática 150g + Sabonete 100g + Difusor de Ambiente</p>
+<p>Velas Aromáticas 150g e 40g + Sabonete 100g</p>
 <p class="price">R$ 95,00</p>
-<div class="buy-btn" onclick="addToCart('Kit Aconchego',95)">Comprar 💝</div>
+<div class="buy-btn" onclick="addToCart('Kit Aconchego',95)">Comprar</div>
 </div>
 
 <div class="product">
-<img src="kit-amor-mae.jpg">
-<h3>Kit - Amor de Mãe </h3>
-<p>Vela Aromática 265g + 3 Sabonetes artesanais 100g</p>
-<p class="price">R$ 125,00</p>
-<div class="buy-btn" onclick="addToCart('Kit Amor de Mãe',125)">Comprar 💝</div>
+<img id="imgVela40" src="produtovela40g.jpg">
+<h3>Vela Aromática - 40g </h3>
+<p>Seu momento de autocuidado.</p>
+<p><strong>Escolha o Aroma:</strong></p>
+
+<select class="select-aroma">
+  <option value="">Escolher aroma</option>
+  <option value="Lavanda">Lavanda</option>
+  <option value="Baunilha">Baunilha</option>
+  <option value="Limão Siciliano">Limão Siciliano</option>
+  <option value="Morango com Champagne">Morango com Champagne</option>
+  <option value="Flor de Cerejeira">Flor de Cerejeira</option>
+  <option value="Flor de Laranjeira">Flor de Laranjeira</option>
+  <option value="Frutas Vermelhas">Frutas Vermelhas</option>
+  <option value="Jabuticaba">Jabuticaba</option>
+</select>
+<p class="price">R$ 25,00 </p>
+
+<div class="buy-btn" onclick="adicionarVela150(this.parentElement.querySelector('.select-aroma'), 25)">Comprar</div>
+
 </div>
 
 <div class="product">
